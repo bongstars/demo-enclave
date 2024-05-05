@@ -61,7 +61,7 @@ export default function FarcasterPage() {
 		return (await (
 			await fetch(url, {
 				headers: {
-					api_key: '97238FF8-F378-4218-98DF-B940C7AD8172',
+					api_key: 'NEYNAR_PRIVY_DEMO',
 					accept: 'application/json',
 				},
 			})
