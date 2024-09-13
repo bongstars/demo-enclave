@@ -23,3 +23,4 @@ npm i
 # Start the demo
 npm run dev
 ```
+# farcaster-demo
