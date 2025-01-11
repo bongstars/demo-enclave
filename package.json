@@ -1,0 +1,29 @@
+{
+  "name": "price-watch-dog",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/index.js",
+    "check": "tsc",
+    "db:push": "drizzle-kit push:sqlite"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "better-sqlite3": "^9.4.3",
+    "drizzle-orm": "^0.29.5",
+    "drizzle-zod": "^0.7.1",
+    "express": "^4.21.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/express": "4.17.21",
+    "@types/node": "20.11.24",
+    "drizzle-kit": "^0.20.14",
+    "tsx": "^4.7.1",
+    "typescript": "5.3.3"
+  }
+}
