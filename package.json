@@ -3,9 +3,9 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"dev": "next dev -p 3004",
+		"dev": "next dev -p 3000",
 		"build": "next build",
-		"start": "next start -p 3004",
+		"start": "next start -p 3000",
 		"lint": "next lint",
 		"format": "eslint \"components/**/*.{ts,tsx,js,jsx}\" \"pages/**/*.{ts,tsx,js,jsx}\" --fix && prettier --write \"components/**/*.{ts,tsx,js,jsx}\" \"pages/**/*.{ts,tsx,js,jsx}\""
 	},
@@ -38,6 +38,9 @@
 		"tailwindcss-safe-area": "^0.2.2",
 		"typescript": "^5.1.6"
 	},
+ "scripts": {
+    "worker": "ts-node scripts/start-worker.ts"
+  },
 	"prettier": {
 		"semi": false,
 		"singleQuote": true,
