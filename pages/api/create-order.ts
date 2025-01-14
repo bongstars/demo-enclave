@@ -1,6 +1,7 @@
 // pages/api/create-order.ts
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/lib/prisma'
+import { getDb } from '@/lib/db'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async function handler(
 	req: NextApiRequest,
@@ -11,22 +12,39 @@ export default async function handler(
 	}
 
 	try {
-		const { amount, targetPrice, smartWalletAddress, sessionKey } = req.body
+		const {
+			amount,
+			targetPrice,
+			smartWalletAddress,
+			sessionKey,
+			tokenAddress,
+			chainId,
+		} = req.body
 
-		// Store order in database
-		const order = await prisma.order.create({
-			data: {
-				amount: parseFloat(amount),
-				targetPrice: parseFloat(targetPrice),
+		const db = await getDb()
+
+		const orderId = uuidv4()
+
+		await db.run(
+			`INSERT INTO orders (
+        id, amount, targetPrice, smartWalletAddress,
+        sessionKey, tokenAddress, chainId, status
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+			[
+				orderId,
+				amount,
+				targetPrice,
 				smartWalletAddress,
 				sessionKey,
-				status: 'PENDING',
-			},
-		})
+				tokenAddress,
+				chainId,
+				'PENDING',
+			]
+		)
 
 		return res.status(200).json({
 			message: 'Order created successfully',
-			orderId: order.id,
+			orderId,
 		})
 	} catch (error) {
 		console.error('Error creating order:', error)

@@ -3,11 +3,8 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"dev": "next dev -p 3000",
-		"build": "next build",
-		"start": "next start -p 3000",
-		"lint": "next lint",
-		"format": "eslint \"components/**/*.{ts,tsx,js,jsx}\" \"pages/**/*.{ts,tsx,js,jsx}\" --fix && prettier --write \"components/**/*.{ts,tsx,js,jsx}\" \"pages/**/*.{ts,tsx,js,jsx}\""
+		"worker": "ts-node --esm scripts/start-worker.mts",
+		"init-db": "ts-node --esm scripts/init-db.mts"
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.0.18",
@@ -16,12 +13,16 @@
 		"@typescript-eslint/eslint-plugin": "^6.7.0",
 		"@typescript-eslint/parser": "^6.7.0",
 		"axios": "^1.5.0",
+		"enclavemoney": "^1.0.5",
 		"next": "14.1.0",
 		"next-themes": "^0.2.1",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-toastify": "^10.0.5",
+		"sqlite": "^5.1.1",
+		"sqlite3": "^5.1.7",
 		"swr": "^2.2.5",
+		"uuid": "^11.0.5",
 		"viem": "^1.10.13"
 	},
 	"devDependencies": {
@@ -38,9 +39,6 @@
 		"tailwindcss-safe-area": "^0.2.2",
 		"typescript": "^5.1.6"
 	},
- "scripts": {
-    "worker": "ts-node scripts/start-worker.ts"
-  },
 	"prettier": {
 		"semi": false,
 		"singleQuote": true,
