@@ -30,10 +30,9 @@ export default function FarcasterPage() {
 	const [recipientAddress, setRecipientAddress] = useState<string>('')
 	useEffect(() => {
 		const fetchBalance = async () => {
-			if (wallet && wallet.address) {
 				console.log(process.env.NEXT_ALCHEMY_BASE_URL)
 				const provider = new ethers.providers.JsonRpcProvider(
-					'https://base-mainnet.g.alchemy.com/v2/OaBJsI6qcV_0ThIGLiF_FC55fGKoZYz1'
+					'https://base.mainnet.org'
 				)
 				const balance = await provider.getBalance(wallet.address)
 				setWalletBalance(ethers.utils.formatEther(balance))

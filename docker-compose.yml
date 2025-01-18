@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://redis:6379
+      - NEXT_PUBLIC_PRIVY_APP_ID=${NEXT_PUBLIC_PRIVY_APP_ID}
+      - NEXT_PUBLIC_ENCLAVE_API_KEY=${NEXT_PUBLIC_ENCLAVE_API_KEY}
+      - ZERO_X_API_KEY=${ZERO_X_API_KEY}  # Added this line
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - redis
+      - worker
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.worker
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=redis://redis:6379
+      - ENCLAVE_API_KEY=${ENCLAVE_API_KEY}
+      - ZERO_X_API_KEY=${ZERO_X_API_KEY}  # Added this line
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+volumes:
+  redis_data:
